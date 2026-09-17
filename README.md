@@ -31,10 +31,12 @@ python3 -m http.server 8000
 
 ## Before you deploy — two files to add
 
-Both slots are wired and fall back gracefully if the files are missing:
+Both are referenced in `index.html` but **commented out**, so the live site serves no dead links in the meantime. Add the file, then uncomment the matching line.
 
-1. **`headshot.jpg`** — drop a professional photo at the repo root. It replaces the "SK" monogram in the hero automatically (the `<img>` removes itself on 404, so nothing breaks before you add it).
-2. **`Shubham-Kumar-Resume.pdf`** — the hero's "Download Résumé" button points here.
+1. **`headshot.jpg`** — drop a professional photo at the repo root and uncomment the `<img class="hero-photo">` in the hero. It covers the "SK" monogram automatically (`.hero-photo` is absolutely positioned over the placeholder).
+2. **`Shubham-Kumar-Resume.pdf`** — uncomment the hero's "Download Résumé" button.
+
+These were originally wired up unconditionally, but `GET /headshot.jpg` returned **HTTP 404** — meaning every visitor's console logged an error and wasted a request until the photo existed. Commenting them out removes that.
 
 ## Copy policy
 
